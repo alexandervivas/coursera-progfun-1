@@ -18,7 +18,16 @@ object Main {
   /**
    * Exercise 2
    */
-    def balance(chars: List[Char]): Boolean = ???
+    def balance(chars: List[Char]): Boolean = innerBalance(chars, 0)
+
+  def innerBalance(chars: List[Char], count: Int): Boolean =
+    if (count < 0) false
+    else if (chars.isEmpty)
+      if (count > 0) false
+      else true
+    else if (chars.head == '(') innerBalance(chars.tail, count + 1)
+    else if (chars.head == ')') innerBalance(chars.tail, count - 1)
+    else innerBalance(chars.tail, count)
   
   /**
    * Exercise 3
