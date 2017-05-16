@@ -18,19 +18,28 @@ object Main {
   /**
    * Exercise 2
    */
-    def balance(chars: List[Char]): Boolean = innerBalance(chars, 0)
+    def balance(chars: List[Char]): Boolean = {
 
-  def innerBalance(chars: List[Char], count: Int): Boolean =
-    if (count < 0) false
-    else if (chars.isEmpty)
-      if (count > 0) false
-      else true
-    else if (chars.head == '(') innerBalance(chars.tail, count + 1)
-    else if (chars.head == ')') innerBalance(chars.tail, count - 1)
-    else innerBalance(chars.tail, count)
+      def innerBalance(chars: List[Char], count: Int): Boolean =
+        if (count < 0) false
+        else if (chars.isEmpty)
+          if (count > 0) false
+          else true
+        else if (chars.head == '(') innerBalance(chars.tail, count + 1)
+        else if (chars.head == ')') innerBalance(chars.tail, count - 1)
+        else innerBalance(chars.tail, count)
+
+      innerBalance(chars, 0)
+    }
+
+
   
   /**
    * Exercise 3
    */
-    def countChange(money: Int, coins: List[Int]): Int = ???
+    def countChange(money: Int, coins: List[Int]): Int =
+      if (coins.isEmpty || money < 0) 0
+      else if (money == 0) 1
+      else countChange(money, coins.tail) + countChange(money - coins.head, coins)
+
   }
