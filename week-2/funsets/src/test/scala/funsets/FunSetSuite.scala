@@ -148,5 +148,36 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("the predicate is true for all elements in set") {
+    new TestSets {
+      val s = union(union(s1, s2), s3)
+      val so = union(s1, s3)
+      val even = (n: Int) => n % 2 == 0
+      val odd = (n: Int) => !even(n)
+      val isEven = filter(s, even)
+      val isOdd = filter(s, odd)
+      assert(!forall(s, even), "All-Even")
+      assert(forall(s2, even), "All-Even")
+      assert(!forall(s, odd), "All-Odd")
+      assert(forall(so, odd), "All-Odd")
+    }
+  }
+
+  test("the predicate is true for at least one elements in set") {
+    new TestSets {
+      val s = union(union(s1, s2), s3)
+      val even = (n: Int) => n % 2 == 0
+      val isEven = filter(s, even)
+      assert(exists(s, even), "At least one even number")
+    }
+  }
+
+    test("the set is transformed given a function") {
+      new TestSets {
+        val s = union(union(s1, s2), s3)
+        val f = (n: Int) => n * 2
+        assert(FunSets.toString(map(s, f)) === "{2,4,6}", "Set transformed")
+      }
+  }
 
 }
