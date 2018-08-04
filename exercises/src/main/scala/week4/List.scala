@@ -15,7 +15,7 @@ class Nil[T] extends List[T] {
 
   override def head: Nothing = throw new NoSuchElementException("Nil.head")
 
-  override def tail: List[T] = throw new NoSuchElementException("Nil.tail")
+  override def tail: Nothing = throw new NoSuchElementException("Nil.tail")
 }
 
 object List {
