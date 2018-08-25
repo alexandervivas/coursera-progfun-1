@@ -83,7 +83,7 @@ object Huffman {
         }
       case _ => Nil
     }
-  
+
   /**
    * Returns a list of `Leaf` nodes for a given frequency table `freqs`.
    *
