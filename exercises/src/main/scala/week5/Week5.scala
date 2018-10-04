@@ -57,4 +57,22 @@ object Week5 {
       merge(msort(fst), msort(snd))
     }
   }
+
+  def squareList1(xs: List[Int]): List[Int] = xs match {
+    case Nil => Nil
+    case y :: ys => y * y :: squareList1(ys)
+  }
+
+  def squareList2(xs: List[Int]): List[Int] = xs map { x => x * x }
+
+  def pack[T](xs: List[T]): List[List[T]] = xs match {
+    case Nil => Nil
+    case x :: xs1 => (x :: xs1 takeWhile(_ == x)) :: pack(xs1 dropWhile(_ == x))
+  }
+
+  def mapFun[T, U](xs: List[T], f: T => U): List[U] =
+    (xs foldRight List[U]())(f(_) :: _)
+
+  def lengthFun[T](xs: List[T]): Int =
+    (xs foldRight 0)( (_, b) => b + 1 )
 }
